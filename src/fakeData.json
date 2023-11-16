@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "createdAt": "2023-11-03T02:07:09.423Z",
+    "nickname": "Thor Odinson",
+    "img": "image-thor.jpg",
+    "content": "Iron Main, Vitae recusandae tenetur debitis impedit.",
+    "writedTo": "iron"
+  },
+  {
+    "id": "2",
+    "createdAt": "2023-11-02T23:13:18.491Z",
+    "nickname": "Hulk",
+    "img": "image-hulk.jpg",
+    "content": "I'm Hulk! Captain America!! Vitae recusandae tenetur debitis impedit.",
+    "writedTo": "cap"
+  },
+  {
+    "id": "3",
+    "createdAt": "2023-11-02T11:25:37.026Z",
+    "nickname": "James Buchanan Bucky Barnes",
+    "img": "image-bucky.jpg",
+    "content": "Captain, Vitae recusandae tenetur debitis impedit.",
+    "writedTo": "cap"
+  },
+  {
+    "id": "4",
+    "createdAt": "2023-11-02T16:06:34.150Z",
+    "nickname": "Virginia Pepper Potts",
+    "img": "image-pepper.jpg",
+    "content": "Tonny, I miss you. Vitae recusandae tenetur debitis impedit.",
+    "writedTo": "iron"
+  },
+  {
+    "id": "5",
+    "createdAt": "2023-11-03T05:40:17.575Z",
+    "nickname": "Spider Man",
+    "img": "image-spider.jpg",
+    "content": "Iron Main, Vitae recusandae tenetur debitis impedit.",
+    "writedTo": "iron"
+  }
+]
