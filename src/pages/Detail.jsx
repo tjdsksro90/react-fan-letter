@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import data from "../fakeData.json";
-import axios from "axios";
 import styled from "styled-components";
 
 const blue = {

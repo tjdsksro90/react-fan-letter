@@ -3,8 +3,7 @@ import styled from "styled-components";
 import data from "../fakeData.json";
 import GlobalStyle from "assets/GlobalStyle";
 import { v4 } from "uuid";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const uuid = () => {
   const tokens = v4().split("-");
@@ -273,6 +272,23 @@ const ListTextDesc = styled.span`
   text-overflow: ellipsis;
   color: #000;
 `;
+const SearchWrap = styled.div`
+  display: flex;
+  gap: 5px;
+  > span {
+    flex: 1;
+  }
+`;
+const SearchSapn = styled.span`
+  display: flex;
+  input {
+    height: 30px;
+    flex: 1;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 5px;
+  }
+`;
 
 function Main() {
   const [tab, setTab] = useState("cap");
@@ -360,6 +376,19 @@ function Main() {
       contentRef.current.focus();
     }
   }, [list.nickname]);
+
+  useEffect(() => {
+    if (list.nickname.length >= 20) {
+      contentRef.current.focus();
+    }
+  }, [list.nickname]);
+
+  // 검색기능
+  const [search, setSearch] = useState("");
+
+  const searchHandler = (e) => {
+    setSearch(e.target.value.toLowerCase());
+  };
 
   return (
     <div>
@@ -450,10 +479,21 @@ function Main() {
               </FormButton>
             </div>
           </FormWrap>
+          <SearchWrap>
+            <SearchSapn>
+              <input
+                type="text"
+                placeholder="search name"
+                value={search}
+                onChange={searchHandler}
+              />
+            </SearchSapn>
+          </SearchWrap>
           <div>
             <ListUl>
               {lists
                 .filter((item) => item.writedTo === tab)
+                .filter((item) => item.nickname.toLowerCase().includes(search))
                 .map((item) => {
                   return (
                     <ListLi
@@ -483,7 +523,7 @@ function Main() {
         </BasicWrap>
       </MainWrap>
       <FooterStyle>
-        <span>copyright @SCC</span>
+        <span>copyright @YOON</span>
       </FooterStyle>
     </div>
   );
