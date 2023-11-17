@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ListImg,
   ListImgFigure,
@@ -13,9 +13,14 @@ import {
   red,
 } from "assets/BasicStyle";
 import { useNavigate } from "react-router-dom";
+import { FamilyContext } from "context/Context";
 
-function List({ tab, lists, search }) {
+function List() {
   const navigate = useNavigate();
+  const contextData = useContext(FamilyContext);
+  const lists = contextData.lists;
+  const tab = contextData.tab;
+  const search = contextData.search;
 
   return (
     <div>

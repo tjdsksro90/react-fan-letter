@@ -6,10 +6,14 @@ import {
   blue,
   red,
 } from "assets/BasicStyle";
-import React from "react";
+import React, { useContext } from "react";
 import character from "./Character";
+import { FamilyContext } from "context/Context";
 
-function Header({ tab, tabHandler }) {
+function Header() {
+  const contextData = useContext(FamilyContext);
+  const tab = contextData.tab;
+
   return (
     <HeaderBg color={tab === "cap" ? blue : red}>
       <HeaderH1>Marvel Fan Letter</HeaderH1>
@@ -20,7 +24,7 @@ function Header({ tab, tabHandler }) {
               className={`${item.val === tab ? "active" : ""} ${item.val}`}
               key={item.val}
               value={item.val}
-              onClick={() => tabHandler(item.val)}
+              onClick={() => contextData.tabHandler(item.val)}
               color={tab === "cap" ? blue : red}
             >
               {item.name}

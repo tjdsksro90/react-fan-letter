@@ -7,19 +7,21 @@ import {
   FormTextarea,
   FormWrap,
 } from "assets/BasicStyle";
-import React from "react";
+import { FamilyContext } from "context/Context";
+import React, { useContext } from "react";
 
-function Form({
-  submitHandler,
-  changeHandler,
-  nicknameRef,
-  contentRef,
-  character,
-  tab,
-  list,
-  red,
-  blue,
-}) {
+function Form() {
+  const contextData = useContext(FamilyContext);
+  const submitHandler = contextData.submitHandler;
+  const nicknameRef = contextData.nicknameRef;
+  const contentRef = contextData.contentRef;
+  const list = contextData.list;
+  const changeHandler = contextData.changeHandler;
+  const character = contextData.character;
+  const tab = contextData.tab;
+  const blue = contextData.blue;
+  const red = contextData.red;
+
   return (
     <FormWrap onSubmit={submitHandler}>
       <FormSection>

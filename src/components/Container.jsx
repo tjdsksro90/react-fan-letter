@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import data from "../fakeData.json";
@@ -7,6 +7,7 @@ import { BasicWrap, MainWrap, blue, red } from "assets/BasicStyle";
 import Form from "./container/Form";
 import Search from "./container/Search";
 import List from "./container/List";
+import { FamilyContext } from "context/Context";
 
 // id 호출
 const uuid = () => {
@@ -14,7 +15,9 @@ const uuid = () => {
   return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4];
 };
 
-function Container({ tab }) {
+function Container() {
+  const contextData = useContext(FamilyContext);
+  const tab = contextData.tab;
   // 기존 최초 배열
   const [lists, setLists] = useState(
     JSON.parse(localStorage.getItem("watched")) || data
@@ -106,23 +109,31 @@ function Container({ tab }) {
   };
 
   return (
-    <MainWrap>
-      <BasicWrap>
-        <Form
-          submitHandler={submitHandler}
-          changeHandler={changeHandler}
-          nicknameRef={nicknameRef}
-          contentRef={contentRef}
-          character={character}
-          tab={tab}
-          list={list}
-          blue={blue}
-          red={red}
-        />
-        <Search search={search} searchHandler={searchHandler} />
-        <List tab={tab} lists={lists} search={search} />
-      </BasicWrap>
-    </MainWrap>
+    <FamilyContext.Provider
+      value={{
+        submitHandler,
+        changeHandler,
+        searchHandler,
+        tab,
+        nicknameRef,
+        contentRef,
+        character,
+        contextData,
+        lists,
+        list,
+        blue,
+        red,
+        search,
+      }}
+    >
+      <MainWrap>
+        <BasicWrap>
+          <Form />
+          <Search />
+          <List />
+        </BasicWrap>
+      </MainWrap>
+    </FamilyContext.Provider>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "components/Header";
 import Container from "components/Container";
 import Footer from "components/Footer";
+import { FamilyContext } from "context/Context";
 
 function Main() {
   // tab 메뉴 관련
@@ -12,11 +13,11 @@ function Main() {
   };
 
   return (
-    <div>
-      <Header tab={tab} tabHandler={tabHandler} />
-      <Container tab={tab} />
+    <FamilyContext.Provider value={{ tab, tabHandler }}>
+      <Header />
+      <Container />
       <Footer />
-    </div>
+    </FamilyContext.Provider>
   );
 }
 
