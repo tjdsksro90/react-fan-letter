@@ -9,7 +9,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.\
-Open [https://react-fan-letter-snowy.vercel.app/]([http://localhost:3000](https://react-fan-letter-snowy.vercel.app/))
+Open [https://react-fan-letter-snowy.vercel.app/](https://react-fan-letter-snowy.vercel.app/)
 
 ## 기능
 
