@@ -15,11 +15,11 @@ import {
   DetailTime,
   DetailTo,
   DetailVh,
-  blue,
-  red,
 } from "assets/BasicStyle";
+import { useDispatch, useSelector } from "react-redux";
 
 function Detail() {
+  const reduxTab = useSelector((state) => state.tab);
   const navigate = useNavigate();
   const param = useParams();
   // const location = useLocation();
@@ -29,18 +29,21 @@ function Detail() {
   const [lists, setLists] = useState(
     JSON.parse(localStorage.getItem("watched")) || data
   );
+  // const lists = useSelector((state) => state.lists);
+  const dispatch = useDispatch();
   // 초기 설정
   useEffect(() => {
     const storedLists = JSON.parse(localStorage.getItem("watched"));
     if (storedLists) {
       setLists(storedLists);
+      // dispatch(storedLists);
+      // console.log(dispatch(storedLists));
     }
   }, []);
 
   // 리스트 변경될 때마다 Local Storage에 저장하는 함수 추가
   useEffect(() => {
     localStorage.setItem("watched", JSON.stringify(lists));
-    console.log("들어옴");
   }, [lists]);
 
   // detail
@@ -49,8 +52,6 @@ function Detail() {
   const detailIndex = JSON.parse(localStorage.getItem("watched")).findIndex(
     (item) => item.id === param.id
   );
-  console.log(detailIndex);
-
   const [editCheck, setEditCheck] = useState(false);
 
   const editClick = () => {
@@ -77,6 +78,7 @@ function Detail() {
     localStorage.removeItem("watched");
     localStorage.setItem("watched", JSON.stringify(commentsJSON));
     setLists(commentsJSON);
+    // dispatch(listEdit(commentsJSON));
     setEditCheck(false);
     navigate("/");
   };
@@ -96,7 +98,7 @@ function Detail() {
   };
 
   return (
-    <DetailBg color={detail.writedTo === "cap" ? blue : red}>
+    <DetailBg color={reduxTab}>
       <Link to="/" style={{ textDecoration: "none" }}>
         <DetailHome>홈으로</DetailHome>
       </Link>
@@ -105,9 +107,7 @@ function Detail() {
           <DetailImg>
             <DetailImg100 src={`../img/${detail.img}`} alt="img" />
           </DetailImg>
-          <DetailH2 color={detail.writedTo === "cap" ? blue : red}>
-            {detail.nickname}
-          </DetailH2>
+          <DetailH2 color={reduxTab}>{detail.nickname}</DetailH2>
           <DetailTime>{detail.createdAt}</DetailTime>
           <DetailTo>
             To. {detail.writedTo === "cap" ? "Captain America" : "Iron Man"}
@@ -121,7 +121,7 @@ function Detail() {
                 rows="10"
                 placeholder="Your Content ( max : 100 )"
                 value={desc}
-                onChange={changeHandler}
+                onChange={changeHandler()}
                 maxLength={100}
                 required
               ></textarea>
@@ -131,31 +131,19 @@ function Detail() {
           )}
           {editCheck ? (
             <DetailBtnWrap>
-              <DetailBtn
-                onClick={editCancel}
-                color={detail.writedTo === "cap" ? blue : red}
-              >
+              <DetailBtn onClick={editCancel} color={reduxTab}>
                 취소
               </DetailBtn>
-              <DetailBtn
-                onClick={editSubmit}
-                color={detail.writedTo === "cap" ? blue : red}
-              >
+              <DetailBtn onClick={editSubmit} color={reduxTab}>
                 수정 완료
               </DetailBtn>
             </DetailBtnWrap>
           ) : (
             <DetailBtnWrap>
-              <DetailBtn
-                onClick={editClick}
-                color={detail.writedTo === "cap" ? blue : red}
-              >
+              <DetailBtn onClick={editClick} color={reduxTab}>
                 수정
               </DetailBtn>
-              <DetailBtn
-                onClick={deleteClick}
-                color={detail.writedTo === "cap" ? blue : red}
-              >
+              <DetailBtn onClick={deleteClick} color={reduxTab}>
                 삭제
               </DetailBtn>
             </DetailBtnWrap>

@@ -6,12 +6,20 @@ import {
   blue,
   red,
 } from "assets/BasicStyle";
-import React from "react";
+import React, { useEffect } from "react";
 import character from "./Character";
+import { useDispatch, useSelector } from "react-redux";
+// import reduxTab from "redux/modules/tab";
 
 function Header({ tab, tabHandler }) {
+  // redux 사용하기
+  // store에 접근하여 state 가져오기
+  const reduxTab = useSelector((state) => state.tab);
+
+  console.log(reduxTab);
+
   return (
-    <HeaderBg color={tab === "cap" ? blue : red}>
+    <HeaderBg color={reduxTab}>
       <HeaderH1>Marvel Fan Letter</HeaderH1>
       <HeaderUl>
         {character.map((item) => {
@@ -21,7 +29,7 @@ function Header({ tab, tabHandler }) {
               key={item.val}
               value={item.val}
               onClick={() => tabHandler(item.val)}
-              color={tab === "cap" ? blue : red}
+              color={reduxTab}
             >
               {item.name}
             </HeaderLi>

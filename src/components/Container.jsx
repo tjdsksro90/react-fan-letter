@@ -7,6 +7,7 @@ import { BasicWrap, MainWrap, blue, red } from "assets/BasicStyle";
 import Form from "./container/Form";
 import Search from "./container/Search";
 import List from "./container/List";
+import { useDispatch, useSelector } from "react-redux";
 
 // id 호출
 const uuid = () => {
@@ -29,6 +30,13 @@ function Container({ tab }) {
     content: "",
     writedTo: "cap",
   };
+  const redux = useSelector((state) => {
+    return state.list;
+  });
+
+  console.log(redux);
+
+  const dispatch = useDispatch();
 
   const [list, setList] = useState(initialState);
 

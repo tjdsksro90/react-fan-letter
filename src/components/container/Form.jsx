@@ -8,6 +8,7 @@ import {
   FormWrap,
 } from "assets/BasicStyle";
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Form({
   submitHandler,
@@ -17,9 +18,9 @@ function Form({
   character,
   tab,
   list,
-  red,
-  blue,
 }) {
+  const reduxTab = useSelector((state) => state.tab);
+
   return (
     <FormWrap onSubmit={submitHandler}>
       <FormSection>
@@ -81,7 +82,7 @@ function Form({
         </FormSpan>
       </FormSection>
       <div>
-        <FormButton color={tab === "cap" ? blue : red} type="submit">
+        <FormButton color={reduxTab} type="submit">
           Send
         </FormButton>
       </div>

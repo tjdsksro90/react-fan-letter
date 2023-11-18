@@ -9,13 +9,13 @@ import {
   ListTextTitle,
   ListTextWrap,
   ListUl,
-  blue,
-  red,
 } from "assets/BasicStyle";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function List({ tab, lists, search }) {
   const navigate = useNavigate();
+  const reduxTab = useSelector((state) => state.tab);
 
   return (
     <div>
@@ -27,7 +27,7 @@ function List({ tab, lists, search }) {
             return (
               <ListLi
                 key={item.id}
-                color={tab === "cap" ? blue : red}
+                color={reduxTab}
                 onClick={() =>
                   navigate("/detail/" + item.id, {
                     state: lists,
